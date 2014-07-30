@@ -2,12 +2,10 @@
   (:require [serial.core :refer :all]))
 
 (defn list-ports
-  "Print out the available ports. The names are printed exactly as they should be passed to open."
+  "Print out the available ports. The names are printed
+   exactly as they should be passed to open."
   []
-  (loop [ports (port-ids)]
-    (when ports
-      (println (.getName (first ports)))
-      (recur (next ports)))))
+  (doall (map #(println (.getName %)) (port-ids))))
 
 (defn- substring? [sub st]
   (not= (.indexOf st sub) -1))
